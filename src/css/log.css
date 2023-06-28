@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  /* background: #0802bd; */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='900' preserveAspectRatio='none' viewBox='0 0 1440 900'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1021%26quot%3b)' fill='none'%3e%3crect width='1440' height='900' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M115.225%2c809.675C196.058%2c808.61%2c279.369%2c785.134%2c321.173%2c715.942C364.214%2c644.703%2c356.832%2c553.585%2c312.512%2c483.134C270.892%2c416.974%2c193.367%2c386.743%2c115.225%2c388.565C40.468%2c390.308%2c-26.107%2c429.208%2c-66.748%2c491.976C-111.79%2c561.54%2c-141.533%2c649.584%2c-100.343%2c721.496C-58.986%2c793.699%2c32.023%2c810.771%2c115.225%2c809.675' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M426.111%2c1318.035C524.176%2c1314.954%2c604.867%2c1246.502%2c650.43%2c1159.61C692.679%2c1079.038%2c691.432%2c981.872%2c642.646%2c905.082C597.067%2c833.339%2c511.033%2c802.96%2c426.111%2c806.526C347.601%2c809.823%2c283.113%2c857.048%2c238.938%2c922.035C186.675%2c998.921%2c136.241%2c1090.468%2c175.968%2c1174.519C219.996%2c1267.669%2c323.131%2c1321.271%2c426.111%2c1318.035' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M56.801%2c586.667C101.83%2c584.126%2c137.257%2c553.639%2c160.872%2c515.215C185.962%2c474.392%2c205.917%2c424.367%2c182.106%2c382.785C158.2%2c341.036%2c104.892%2c332.158%2c56.801%2c333.472C11.471%2c334.711%2c-32.46%2c351.306%2c-57.177%2c389.325C-84.338%2c431.104%2c-94.741%2c485.081%2c-69.818%2c528.233C-44.901%2c571.375%2c7.059%2c589.474%2c56.801%2c586.667' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1279.847534278723 389.4889786975426L1228.6528979407235 231.92808924840728 1071.092008491588 283.1227255864069 1122.2866448295877 440.68361503554223z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1415.067%2c222.135C1470.569%2c223.433%2c1527.496%2c203.182%2c1555.264%2c155.108C1583.04%2c107.02%2c1570.313%2c48.651%2c1543.297%2c0.132C1515.372%2c-50.021%2c1472.469%2c-96.282%2c1415.067%2c-96.68C1357.152%2c-97.082%2c1310.705%2c-52.913%2c1283.718%2c-1.669C1258.665%2c45.902%2c1258.573%2c102.437%2c1285.787%2c148.806C1312.664%2c194.601%2c1361.982%2c220.893%2c1415.067%2c222.135' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M566.8003651715256 797.8564062435555L698.6276646399593 683.2606831335179 584.0319415299217 551.4333836650842 452.204642061488 666.0291067751218z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M336.961%2c454.717C410.766%2c456.827%2c478.676%2c418.516%2c518.828%2c356.553C563.169%2c288.126%2c588.359%2c200.56%2c547.307%2c130.11C506.455%2c60.002%2c418.101%2c45.079%2c336.961%2c44.446C254.343%2c43.802%2c160.395%2c54.238%2c120.856%2c126.784C82.252%2c197.614%2c127.868%2c279.288%2c172.256%2c346.645C210.983%2c405.412%2c266.61%2c452.706%2c336.961%2c454.717' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1021'%3e%3crect width='1440' height='900' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+  overflow: hidden;
+}
+::selection {
+  background: rgba(26, 188, 156, 0.3);
+}
+.container {
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 50px auto;
+}
+.wrapper {
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.1);
+}
+.wrapper .title {
+  height: 90px;
+  background: skyblue;
+  border-radius: 5px 5px 0 0;
+  color: black;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form {
+  padding: 30px 25px 25px 25px;
+}
+.wrapper form .row {
+  height: 45px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.wrapper form .row input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: black;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+form .row input:focus {
+  border-color: blue;
+  box-shadow: inset 0px 0px 2px 2px rgba(26, 188, 156, 0.25);
+}
+form .row input::placeholder {
+  color: black;
+}
+.wrapper form .row i {
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: black;
+  font-size: 18px;
+  background: skyblue;
+  border: 1px solid #16a085;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form .pass {
+  margin: -8px 0 20px 0;
+}
+.wrapper form .pass a {
+  color: #16a085;
+  font-size: 17px;
+  text-decoration: none;
+}
+.wrapper form .pass a:hover {
+  text-decoration: underline;
+}
+.wrapper form .button input {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: skyblue;
+  border: 1px solid #16a085;
+  cursor: pointer;
+}
+form .button input:hover {
+  background: rgb(61, 140, 171);
+}
+.wrapper form .signup-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+.wrapper form .signup-link a {
+  color: #16a085;
+  text-decoration: none;
+}
+form .signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* index main */
+
+.main {
+  width: 500px;
+  height: 600px;
+  background-color: white;
+}
