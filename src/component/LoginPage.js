@@ -70,7 +70,7 @@ const LoginPage = () => {
     signInWithPopup(auth, provider)
       .then(async (res) => {
         const user = res?.user;
-        const q1 = query(collection(db, "User"), where("uid", "==", user.uid));
+        const q1 = query(collection(db, "User"), where("uid", "==", user?.uid));
         const querysnap = await getDocs(q1);
 
         if (querysnap.empty) {

@@ -15,9 +15,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 const Details = () => {
-  const [val, setVal] = useState([]);
   const [img, setImg] = useState(
     "https://s3.amazonaws.com/thinkific-import/284749/3JzokDFKQ66wIF2stcSw_Alec_cuence_reviews_tiktok_workshops_png.png"
   );
@@ -32,7 +30,6 @@ useEffect(()=>{})
     if (data && data?.uid) {
       try {
 
-        console.log(data.uid)
         const q = query(collection(db, "User"), where("uid", "==", data?.uid));
       
         const quersnap = await getDocs(q);

@@ -43,9 +43,6 @@ const Home = () => {
   const db = getFirestore(app);
 
   const chatQuery = query(collection(db, "Chat"), orderBy("createdAt", "asc"));
-  const typingIndicatorRef = collection(db, "Chats");
-  const typingQuery = query(typingIndicatorRef, where("roomId", "==", roomId));
-
   const handleOnEnter = async (text) => {
     try {
       await addDoc(collection(db, "Chat"), {
@@ -53,21 +50,11 @@ const Home = () => {
         senderId: user?.uid,
         url: user?.photoURL,
         message: text,
-        isTyping: false,
         createdAt: serverTimestamp(),
+        typing: false,
       });
-      stopTyping(); // Stop typing after sending a message
     } catch (err) {
       console.error("Error adding chat:", err);
-    }
-  };
-
-  const handleOnChange = (text) => {
-    setText(text);
-    if (text.trim() !== "") {
-      startTyping();
-    } else {
-      stopTyping();
     }
   };
 
@@ -85,52 +72,10 @@ const Home = () => {
       setFilteredChats(filteredChats);
     });
 
-    const unsubscribeTyping = onSnapshot(typingQuery, (snapshot) => {
-      const typingStatus = snapshot.docs.some((doc) => doc.data().isTyping);
-      setIsTyping(typingStatus);
-    });
-
     return () => {
       unsubscribeChat();
-      unsubscribeTyping();
     };
   }, [roomId, searchText]);
-
-  const id = useSelector((state) => state.userData.user.uid);
-  const startTyping = async () => {
-    console.log("--->", id);
-
-    const q1 = query(collection(db, "Chats"), where("userId", "==", id));
-    const querysnap = await getDocs(q1);
-
-    if (querysnap.empty) {
-      await addDoc(collection(db, "Chats"), {
-        isTyping: true,
-        roomId: roomId,
-        userId: id,
-      });
-    } else {
-      await updateDoc(collection(db, "Chats",id), {
-        isTyping: true,
-      });
-    }
-  };
-  const stopTyping = async () => {
-    try {
-      const typingDocQuery = query(
-        typingIndicatorRef,
-        where("roomId", "==", roomId),
-        where("userId", "==", user.uid)
-      );
-      const typingDocSnapshot = await getDocs(typingDocQuery);
-      if (!typingDocSnapshot.empty) {
-        const typingDocRef = typingDocSnapshot.docs[0].ref;
-        await updateDoc(typingDocRef, { isTyping: false });
-      }
-    } catch (err) {
-      console.error("Error stopping typing:", err);
-    }
-  };
 
   const handleSearch = () => {
     const filteredChats = chats.filter((item) =>
@@ -139,18 +84,51 @@ const Home = () => {
     setFilteredChats(filteredChats);
   };
 
+  const handleOnChange = async (e) => {
+    setText(e.target.value);
+    //i want to update the typing if user is typing
+    setIsTyping(true);
+    const q1 = query(
+      collection(db, "Chat"),
+      where("senderId", "==", user?.uid),
+      where("roomId", "==", roomId)
+    );
+    const querysnap = await getDocs(q1);
+    if (querysnap.empty) {
+      await addDoc(collection(db, "Chat"), {
+        roomId: roomId,
+        senderId: user.uid,
+        message: text,
+        typing: true,
+        url: user.photoURL,
+        createdAt: serverTimestamp(),
+      });
+    } else {
+
+      let i = "";
+      querysnap.forEach((doc) => (i = doc.id));
+
+      const ref = doc(db, "Chat", i);
+      await updateDoc(ref, {
+        typing: true,
+      });
+    }
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 1000);
+  };
+
   const submit = async () => {
     try {
       await addDoc(collection(db, "Chat"), {
         roomId: roomId,
         senderId: user.uid,
         message: text,
-        isTyping: false,
+        typing: false,
         url: user.photoURL,
         createdAt: serverTimestamp(),
       });
       setText(""); // Clear the input field after sending a message
-      stopTyping(); // Stop typing after sending a message
     } catch (err) {
       console.error("Error adding chat:", err);
     }
@@ -225,7 +203,7 @@ const Home = () => {
             )}
           </div>
           <div className="messageField">
-            <div className="bg">
+            <div className="bg" style={{ width: "95%", display: "flex" }}>
               <InputEmoji
                 className="inputBox"
                 value={text}
@@ -234,10 +212,21 @@ const Home = () => {
                 onEnter={handleOnEnter}
                 placeholder="Type a message"
               />
+              <button
+                className="button"
+                onClick={submit}
+                disabled={!startConvo}
+                style={{
+                  width: "100px",
+                  borderRadius: "10px",
+                  fontSize: "25px",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                Send
+              </button>
             </div>
-            <button className="button" onClick={submit} disabled={!startConvo}>
-              Send
-            </button>
           </div>
         </div>
       </div>
