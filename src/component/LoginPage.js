@@ -70,25 +70,29 @@ const LoginPage = () => {
     signInWithPopup(auth, provider)
       .then(async (res) => {
         const user = res?.user;
-        const q1 = query(collection(db, "User"), where("uid", "==", user?.uid));
+        const q1 = query(collection(db, "User"), where("uid", "==", user.uid));
         const querysnap = await getDocs(q1);
 
         if (querysnap.empty) {
           await addDoc(collection(db, "User"), {
-            name: user?.displayName,
-            uid: user?.uid,
-            url: user?.photoURL,  
-            flag:true,
+            name: user.displayName,
+            uid: user.uid,
+            url: user.photoURL,
+            flag: true,
             createdAt: serverTimestamp(),
           });
-        } else if(!querysnap.empty) {
-          const ref = doc(db, "User", val2[0][0]?.id);
-           await updateDoc(ref, {
+        } else {
+
+          let i = "";
+          querysnap.forEach((doc) => (i = doc.id));
+
+          const ref = doc(db, "User", i);
+          await updateDoc(ref, {
             flag: true,
           });
         }
       })
-      .catch((err) => alert("Login Page: " +err));
+      .catch((err) => alert("Login Page: " + err));
   };
 
   return (

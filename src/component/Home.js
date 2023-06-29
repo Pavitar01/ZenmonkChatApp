@@ -51,6 +51,7 @@ const Home = () => {
       await addDoc(collection(db, "Chat"), {
         roomId: roomId,
         senderId: user?.uid,
+        url: user?.photoURL,
         message: text,
         isTyping: false,
         createdAt: serverTimestamp(),
@@ -95,15 +96,22 @@ const Home = () => {
     };
   }, [roomId, searchText]);
 
+  const id = useSelector((state) => state.userData.user.uid);
   const startTyping = async () => {
-    const q1 = query(collection(db, "Chats"), where("userId", "==", user?.uid));
+    console.log("--->", id);
+
+    const q1 = query(collection(db, "Chats"), where("userId", "==", id));
     const querysnap = await getDocs(q1);
 
     if (querysnap.empty) {
       await addDoc(collection(db, "Chats"), {
         isTyping: true,
         roomId: roomId,
-        userId: user?.uid,
+        userId: id,
+      });
+    } else {
+      await updateDoc(collection(db, "Chats",id), {
+        isTyping: true,
       });
     }
   };
@@ -227,11 +235,7 @@ const Home = () => {
                 placeholder="Type a message"
               />
             </div>
-            <button
-              className="button"
-              onClick={submit}
-              disabled={!startConvo}
-            >
+            <button className="button" onClick={submit} disabled={!startConvo}>
               Send
             </button>
           </div>

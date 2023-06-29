@@ -25,29 +25,21 @@ const Details = () => {
   const data = useSelector((state) => {
     return state.userData.user;
   });
-  const q = query(collection(db, "User"), orderBy("createdAt", "asc"));
 
-  useEffect(() => {
-    const a = onSnapshot(q, (snapshot) => {
-      const data1 = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      const filteredData = data1?.filter((item) => item?.uid === data?.uid);
-      setVal([filteredData]);
-    });
-
-    return () => {
-      a();
-    };
-  }, []);
-
+useEffect(()=>{})
   const auth = getAuth(app);
   const handleSignout = async () => {
     if (data && data?.uid) {
       try {
-        signOut(auth);
-        const ref = doc(db, "User", val[0][0]?.id);
+
+        console.log(data.uid)
+        const q = query(collection(db, "User"), where("uid", "==", data?.uid));
+      
+        const quersnap = await getDocs(q);
+        let i = "";
+        quersnap.forEach((doc) => (i = doc.id));
+
+        const ref = doc(db, "User", i);
         await updateDoc(ref, {
           flag: false,
         });
@@ -55,6 +47,8 @@ const Details = () => {
         alert("Error updating field and signing out: ", error);
       }
     }
+        signOut(auth);
+       
   };
   return (
     <div className="details">
